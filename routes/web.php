@@ -15,19 +15,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('test', function () {
-    return view('test/test');
-});*/
 
-//para entrar a esta ruta se hace con:
-//http://localhost:8000/articles/view/1 , el 1 es porque hay que pasar un valor.
+//Los prefijos sirven para crear grupos de rutas, de esta manera todo lo que venga después del
+//grupo de rutas 
+//resource recibe 2 parametros: el nombre de la ruta y después el controlador del cual se van a definir las rutas
+Route::group(['prefix'=>'admin'], function(){//anidar rutas de acceso
 
-Route::group(['prefix'=>'articles'], function(){//anidar rutas de acceso
 
-//llamamos a un controlador y a una funcion especifica de el, pasando como parametro id
-// y con un nombre o alias de articlesview que esta dentro del grupo de rutas articles.
-	Route::get('view/{id}', [
-		'uses' => 'testcontroller@view',
-		'as' => 'articlesview'
+	Route::resource('users','UserControllers');
+	Route::get('users/{id}/destroy' ,[
+		'uses' => 'UserControllers@destroy',
+		'as' => 'users.destroy'
 	]);
+	
 });
+
+/*Route::group(['middleware' =>['web'], 'prefix'=> 'admin'], function(){
+  Route::resource('users', 'UserControllers');
+  Route::get('users/{id}/destroy',[
+    'uses'  => 'UserControllers@destroy',
+    'as'    => 'users.destroy'
+  ]);
+});*/

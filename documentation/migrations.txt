@@ -1,0 +1,119 @@
+
+
+---------------------------Users----------------------------------------------------------------------------------
+
+Schema::create('users', function (Blueprint $table) {//Schema es la clase que permite modificar las tablas, Blueprint añade atributos y funciones a la tabla
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->enum('type',['paciente','doctor'])->default('doctor');
+	    $table->string('slug')->nullable();
+            $table->rememberToken();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+
+----------------------------PasswordResets---------------------------------------------------------------
+
+Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->softDeletes();
+            $table->timestamps()->nullable();
+        });
+
+--------------------------Categories------------------------------------------------------------
+
+ Schema::create('categories', function (Blueprint $table) {
+            $table->increments('id');//id autoincrementable
+            $table->string('name',60);
+	    $table->string('slug')->nullable();
+            $table->rememberToken();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+------------------------------Articles-----------------------------------------------------------------------
+
+Schema::create('articles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->string('content');
+	    $table->string('slug')->nullable();
+            $table->rememberToken();
+            $table->softDeletes();
+            $table->timestamps();
+
+//relacion a la tabla users y se agrega ondelete cascade por si se borrara el usuario
+//al que hacian referencia estos articulos
+
+            $table->integer('user_id')->unsigned();
+            $table->integer('category_id')->unsigned();
+            
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
+
+            $table->foreign('category_id')
+            ->references('id')
+            ->on('categories')
+            ->onDelete('cascade');
+                     
+        });
+
+-----------------------------------Images-----------------------------------------------------------------
+
+Schema::create('images', function (Blueprint $table) {
+            $table->increments('id');//PK
+            $table->string('name');
+            $table->string('slug')->nullable();
+            $table->rememberToken();
+            $table->softDeletes();
+            $table->timestamps();
+
+            $table->integer('article_id')->unsigned();//FK
+            
+            $table->foreign('article_id')
+            ->references('id')
+            ->on('articles')
+            ->onDelete('cascade');
+
+        });
+
+------------------------Tags------------------------------------------------------
+
+Schema::create('tags', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+	    $table->string('slug')->nullable();
+            $table->rememberToken();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+----------------------Article_Tag------------------------------------------------------------------------
+
+Schema::create('article_tag', function (Blueprint $table){
+            $table->increments('id');
+            $table->string('slug')->nullable();
+            $table->rememberToken();
+            $table->softDeletes();
+            $table->timestamps();
+
+            $table->integer('article_id')->unsigned();
+            $table->integer('tag_id')->unsigned();
+
+            $table->foreign('article_id')
+            ->references('id')
+            ->on('articles')
+            ->onDelete('cascade');
+
+            $table->foreign('tag_id')
+            ->references('id')
+            ->on('tags')
+            ->onDelete('cascade');
+
+        });

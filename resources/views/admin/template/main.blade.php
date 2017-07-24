@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>@yield('title','Default') | Panel de administrador</title>
+	<title>Panel de administrador</title>
 	<!-- los yield son de blade y sirven ara colocar contenido dentro de la plantilla
 	de la vista-->
 	<!-- Bootstrap core CSS -->
@@ -10,13 +10,24 @@
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
 	<!-- Custom styles for this template -->
     <link href="{{ asset('css/general.css') }}" rel="stylesheet">
+    <!--Flash notifications-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!--Font Awesome icons-->
+    <script src="https://use.fontawesome.com/3c4bc4c435.js"></script>
 	
 </head>
 <body>	
 	
 	@include('admin.template.partials.nav')
 	<section>
-		@yield('content');
+		<div class="page-header" 
+		style="background-color:#009688; color:white; margin-top:30px;" >
+  			<h3>@yield('title','Default')</h>
+		</div>
+		<div class="panel-body">
+			@include('flash::message')
+			@yield('content')
+		</div>
 	</section>
 
 	<!-- Bootstrap core JavaScript

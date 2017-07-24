@@ -177,8 +177,20 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+        Laravel Collective 
+        */
+        Collective\Html\HtmlServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+
+        /*LAravelcast/flash*/
+        Laracasts\Flash\FlashServiceProvider::class,
     ],
 
+    /*
+    Providers personales para laravelcollective/html
+    */
+    
     /*
     |--------------------------------------------------------------------------
     | Class Aliases
@@ -225,7 +237,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        /*
+        Aliases para Laravel Collective
+        */
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Flash' => Laracasts\Flash\Flash::class,
     ],
 
 ];
