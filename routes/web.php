@@ -21,11 +21,17 @@ Route::get('/', function () {
 //resource recibe 2 parametros: el nombre de la ruta y después el controlador del cual se van a definir las rutas
 Route::group(['prefix'=>'admin'], function(){//anidar rutas de acceso
 
-
+/*USERS*******************************************************/
 	Route::resource('users','UserControllers');
 	Route::get('users/{id}/destroy' ,[
 		'uses' => 'UserControllers@destroy',
 		'as' => 'users.destroy'
+	]);
+/*CATEGORIES*******************************************************/
+	Route::resource('categories', 'CategoriesController');
+	Route::get('categories/{id}/destroy' ,[
+		'uses' => 'CategoriesController@destroy',
+		'as' => 'categories.destroy'
 	]);
 	
 });

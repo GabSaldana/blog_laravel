@@ -51,7 +51,7 @@ class UserControllers extends Controller
     	//dd($user);
     	$user->delete();
 
-    	flash('EL usuario ' . $user->name . 'ha sido borrado correctamente')->warning()->important();
+    	flash('El usuario ' . $user->name .  ' ha sido borrado correctamente')->warning()->important();
     	return redirect()->route('users.index');
     }
 
@@ -75,7 +75,7 @@ class UserControllers extends Controller
         $user->email= $request->email;
         $user->type= $request->type;
         $user->save();
-        flash('EL usuario ' . $user->name . ' ha sido guardado correctamente')->warning()->important();
+        flash('El usuario ' . $user->name . ' ha sido guardado correctamente')->warning()->important();
         return redirect()->route('users.index');
     }
 }
