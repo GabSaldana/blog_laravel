@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <img alt="eldercare" class="admin-logo-nav" src="{{ asset('images/030-jigglypuff.png') }}">
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

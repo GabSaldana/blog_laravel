@@ -32,7 +32,9 @@
 			@endforeach
 		</tbody>		
 	</table>
-	<!--Renderizando la paginacion-->
-	{!!  $categories->render() !!}
+	<div class="text-center"> 
+		<!--Renderizando la paginacion, sin esto no aparece en la vista-->
+		{!!  $categories->render() !!}	
+	</div>
 
 @endsection
