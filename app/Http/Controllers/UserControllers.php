@@ -10,9 +10,9 @@ use App\Http\Requests\UserRequest;
 
 class UserControllers extends Controller
 {
-    
+
     public function index(){
-    
+
     	//dd('metodo default');
     	//paginacion es una tecnica para mostrar grandes contenidos de infrmación sin
     	//perder las dimesiones de la pagina web.
@@ -24,12 +24,12 @@ class UserControllers extends Controller
 
     	//dd('Hola esto es un mensaje de el controlador de usuarios, funcion crear');
     	//vista para crear un usuario
-    	
+
     	return view('admin.users.create');
     }
 
     public function store(Request $request){
-    	
+
     	$this->validate($request, [
             'name' => 'bail|required|min:4|max:120',
             'email' => 'required|unique:users|max:255',
@@ -37,7 +37,7 @@ class UserControllers extends Controller
         //dd($request->all());
     	$user = new User($request->all());
     	//$user->password=bcrypt($request->password);
-    	$user->password=$request->password;
+    	$user->password=bcrypt($request->password);//SIN EL BCRYPT NO LOGGEA
     	$user->save();
     	//dd($user->all());
     	//dd('Llamando a store dentro del controlador');

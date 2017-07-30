@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 
 //Los prefijos sirven para crear grupos de rutas, de esta manera todo lo que venga después del
-//grupo de rutas 
+//grupo de rutas
 //resource recibe 2 parametros: el nombre de la ruta y después el controlador del cual se van a definir las rutas
 Route::group(['prefix'=>'admin'], function(){//anidar rutas de acceso
 
@@ -33,13 +33,24 @@ Route::group(['prefix'=>'admin'], function(){//anidar rutas de acceso
 		'uses' => 'CategoriesController@destroy',
 		'as' => 'categories.destroy'
 	]);
-	
+
 });
 
-/*Route::group(['middleware' =>['web'], 'prefix'=> 'admin'], function(){
-  Route::resource('users', 'UserControllers');
-  Route::get('users/{id}/destroy',[
-    'uses'  => 'UserControllers@destroy',
-    'as'    => 'users.destroy'
-  ]);
-});*/
+/*Auth::routes();*/
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('admin/auth/login', [
+    'uses'  => 'Auth\LoginController@showLoginForm',
+    'as'    => 'admin.auth.login'
+]);
+
+Route::post('admin/auth/login', [
+    'uses'  => 'Auth\LoginController@login',
+    'as'    => 'admin.auth.login'
+]);
+
+Route::get('admin/auth/logout', [
+    'uses'  => 'Auth\LoginController@logout',
+    'as'    => 'admin.auth.logout'
+]);

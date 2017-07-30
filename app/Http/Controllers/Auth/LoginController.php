@@ -25,8 +25,9 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+    protected $redirectTo = '/admin/users';
+    protected $redirectPath = '/admin';
+    protected $loginPath = '/admin/auth/login';
     /**
      * Create a new controller instance.
      *
@@ -35,5 +36,11 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function showLoginForm(){
+
+      return view('admin.auth.login');
+
     }
 }

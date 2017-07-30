@@ -13,6 +13,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      @if( Auth::user() )
       <ul class="nav navbar-nav">
         <li><a href="{{ route('users.create') }}">Inicio</a></li>
         <li><a href="{{ route('users.index') }}">Usuarios</a></li>
@@ -21,17 +22,13 @@
         <li><a href="#">Imagenes</a></li>
         <li><a href="#">Tags</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Ejemplo</a></li>
-            <li><a href="{{ route('users.index') }}">Usuarios</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Imagenes</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Tags</a></li>
+            <li><a href="{{ route('admin.auth.logout') }}">Salir</a></li>
           </ul>
         </li>
       </ul>
+      @endif
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
