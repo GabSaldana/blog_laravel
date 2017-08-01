@@ -39,6 +39,8 @@ Route::group(['prefix'=>'admin' , 'middleware' => 'auth'], function(){//anidar r
   		'uses' => 'TagsController@destroy',
   		'as' => 'tags.destroy'
   	]);
+/*ARTICLES*******************************************************/
+Route::resource('articles', 'ArticlesController');
 
 });
 
