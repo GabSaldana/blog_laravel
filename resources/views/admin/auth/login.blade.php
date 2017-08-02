@@ -15,8 +15,9 @@
   </div>
 
   <div class="form-group">
-    {!! Form::submit('Registrar',['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('Entrar',['class' => 'btn btn-primary']) !!}
   </div>
+  
 
 {!! Form::close() !!}
 @endsection

@@ -18,7 +18,7 @@
         <li><a href="#">Inicio</a></li>
         <li><a href="{{ route('users.index') }}">Usuarios</a></li>
         <li><a href="{{ route('categories.index') }}">Categorias</a></li>
-        <li><a href="#">Articulos</a></li>
+        <li><a href="{{ route('articles.index') }}">Articulos</a></li>
         <li><a href="#">Imagenes</a></li>
         <li><a href="{{ route('tags.index') }}">Tags</a></li>
         <li class="dropdown">

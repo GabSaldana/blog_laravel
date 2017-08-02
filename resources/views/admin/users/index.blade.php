@@ -4,7 +4,7 @@
 
 @section('content')
 
-	<a href="{{ route('users.create') }}" class="btn btn-info">Registrar nuevo usuario</a><hr>
+<a href="{{ route('users.create') }}" class="btn btn-info">Registrar nuevo usuario</a><hr> 
 	<table class="table">
 		<thead>
 			<th>ID</th>
@@ -25,23 +25,23 @@
 						@else
 							<span class="label label-primary">{{ $user->type }}</span>
 						@endif
-					</td>	
+					</td>
 					<td>
-						<a href="{{ route('users.destroy', $user->id) }}" 
+						<a href="{{ route('users.destroy', $user->id) }}"
 						onclick="return confirm('Seguro que deseas eliminarlo?')" class="btn btn-danger">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-						</a> 
+						</a>
 						<a href="{{ route('users.edit', $user->id)}}" class="btn btn-warning">
 							<span class="fa fa-pencil fa-lg" ></span>
 						</a>
 					</td>
 				</tr>
 			@endforeach
-		</tbody>		
+		</tbody>
 	</table>
-	<div class="text-center"> 
+	<div class="text-center">
 		<!--Renderizando la paginacion, sin esto no aparece en la vista-->
-		{!!  $users->render() !!}	
+		{!!  $users->render() !!}
 	</div>
 
 @endsection

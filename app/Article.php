@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Article extends Model 
+class Article extends Model
 {
-    
+
     use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
@@ -44,5 +44,10 @@ class Article extends Model
 
     public function tags(){
     	return $this->belongsToMany('App\Tag');
+    }
+
+    public function scopeSearch($query, $title){
+
+        return $query->where('title','like','%'.$title.'%');
     }
 }

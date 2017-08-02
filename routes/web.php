@@ -40,13 +40,16 @@ Route::group(['prefix'=>'admin' , 'middleware' => 'auth'], function(){//anidar r
   		'as' => 'tags.destroy'
   	]);
 /*ARTICLES*******************************************************/
-Route::resource('articles', 'ArticlesController');
-
+  Route::resource('articles', 'ArticlesController');
+  Route::get('articles/{id}/destroy' ,[
+      'uses' => 'ArticlesController@destroy',
+      'as' => 'articles.destroy'
+    ]);
 });
 
-/*Auth::routes();*/
+/*Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');*/
 
 Route::get('admin/auth/login', [
     'uses'  => 'Auth\LoginController@showLoginForm',

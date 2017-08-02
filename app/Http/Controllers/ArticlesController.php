@@ -12,9 +12,15 @@ use Laracasts\Flash\Flash;//mensajes flash
 class ArticlesController extends Controller
 {
 
-    public function index(){
+    public function index(Request $request){
 
-        return view('admin.articles.index');
+        $articles = Article::search($request->title)->orderBy('id','ASC')->paginate(5);
+        $articles->each(function($articles){
+          $articles->category;
+          $articles->user;
+        });
+        //dd($articles);
+        return view('admin.articles.index')->with('articles',$articles);
     }
 
     public function create(){
@@ -29,6 +35,12 @@ class ArticlesController extends Controller
 
     public function store(Request $request){
 
+        $this->validate($request, [
+            'title' => 'min:2|max:250|required|unique:articles',
+            'category_id' => 'required',
+            'content' => 'min:10|required',
+            'image' => 'required'
+        ]);
         //dd($request->tags);
         /*Manipulación de images*/
         if($request->file('image') ){
@@ -53,5 +65,44 @@ class ArticlesController extends Controller
 
         Flash::success('Se ha creado el articulo ' . $article->title . ' correctamente!');
         return redirect()->route('articles.index');
+    }
+
+    public function update(Request $request, $id){
+
+      $article = Article::find($id);
+      $article->fill($request->all());
+      $article->save();
+      //actualizando tabla pivote
+        $article->tags()->sync($request->tags);
+      flash('El articulo ' . $article->title . ' ha sido guardado correctamente')->warning()->important();
+      return redirect()->route('articles.index');
+    }
+
+    public function edit($id){
+
+        $article = Article::find($id);
+        $article->category;
+        //dd($article->category->id);
+        $categories = Category::orderBy('name', 'ASC')->pluck('name','id');
+        $tags = Tag::orderBy('name', 'ASC')->pluck('name','id');
+        $my_tags = $article->tags->pluck('id')->toArray();
+        //dd($article->tags->pluck('id')->toArray());
+
+        return view('admin.articles.edit')
+        ->with('categories',$categories)
+        ->with('article', $article)
+        ->with('tags',$tags)
+        ->with('my_tags', $my_tags);
+
+    }
+
+    public function destroy($id){
+
+      $article = Article::find($id);
+      //dd($article->id);
+      $article->delete();
+
+      flash('El artículo ' . $article->title .  ' ha sido borrado correctamente')->warning()->important();
+    	return redirect()->route('articles.index');
     }
 }
