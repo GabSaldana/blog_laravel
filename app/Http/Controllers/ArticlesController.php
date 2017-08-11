@@ -39,7 +39,7 @@ class ArticlesController extends Controller
             'title' => 'min:2|max:250|required|unique:articles',
             'category_id' => 'required',
             'content' => 'min:10|required',
-            'image' => 'required'
+            'image' => 'image|required'
         ]);
         //dd($request->tags);
         /*Manipulación de images*/
@@ -55,7 +55,7 @@ class ArticlesController extends Controller
         $article->user_id = \Auth::user()->id;
         //dd($article);
         $article->save();
-//Llenando tabla PIVOTE ARTICLE_TAG
+        //Llenando tabla PIVOTE ARTICLE_TAG
         $article->tags()->sync($request->tags);
 
         $image = new Image();

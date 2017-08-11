@@ -40,11 +40,17 @@ Route::group(['prefix'=>'admin' , 'middleware' => 'auth'], function(){//anidar r
   		'as' => 'tags.destroy'
   	]);
 /*ARTICLES*******************************************************/
-  Route::resource('articles', 'ArticlesController');
+Route::resource('articles', 'ArticlesController');
   Route::get('articles/{id}/destroy' ,[
       'uses' => 'ArticlesController@destroy',
       'as' => 'articles.destroy'
     ]);
+
+  Route::get('images',[
+      'uses' => 'ImagesController@index',
+      'as' => 'admin.images.index'
+  ]);
+
 });
 
 /*Auth::routes();

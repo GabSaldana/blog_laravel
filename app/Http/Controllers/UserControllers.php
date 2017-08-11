@@ -31,8 +31,8 @@ class UserControllers extends Controller
     public function store(Request $request){
 
     	$this->validate($request, [
-            'name' => 'bail|required|min:4|max:120',
-            'email' => 'required|unique:users|max:255',
+            'name'     => 'bail|required|min:4|max:120',
+            'email'    => 'required|unique:users|max:255',
         ]);
         //dd($request->all());
     	$user = new User($request->all());

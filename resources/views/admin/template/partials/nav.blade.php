@@ -19,7 +19,7 @@
         <li><a href="{{ route('users.index') }}">Usuarios</a></li>
         <li><a href="{{ route('categories.index') }}">Categorias</a></li>
         <li><a href="{{ route('articles.index') }}">Articulos</a></li>
-        <li><a href="#">Imagenes</a></li>
+        <li><a href="{{ route('admin.images.index') }}">Imagenes</a></li>
         <li><a href="{{ route('tags.index') }}">Tags</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
