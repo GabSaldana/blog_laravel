@@ -11,22 +11,32 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//RUTAS PARA EL FROTNEND
 
+Route::get('/', [
+
+  'as' => 'front.index',
+  'uses' => 'FrontController@index'
+]);
 
 //Los prefijos sirven para crear grupos de rutas, de esta manera todo lo que venga después del
 //grupo de rutas
 //resource recibe 2 parametros: el nombre de la ruta y después el controlador del cual se van a definir las rutas
 Route::group(['prefix'=>'admin' , 'middleware' => 'auth'], function(){//anidar rutas de acceso
 
+  Route::get('/', ['as' => 'admin.index', function(){
+      return view('admin.index');
+  }]);
+
 /*USERS*******************************************************/
-	Route::resource('users','UserControllers');
-	Route::get('users/{id}/destroy' ,[
-		'uses' => 'UserControllers@destroy',
-		'as' => 'users.destroy'
-	]);
+  Route::group(['middleware' => 'admin'], function(){
+      Route::resource('users','UserControllers');
+      Route::get('users/{id}/destroy' ,[
+        'uses' => 'UserControllers@destroy',
+        'as' => 'users.destroy'
+      ]);
+  });
+
 /*CATEGORIES*******************************************************/
 	Route::resource('categories', 'CategoriesController');
 	Route::get('categories/{id}/destroy' ,[

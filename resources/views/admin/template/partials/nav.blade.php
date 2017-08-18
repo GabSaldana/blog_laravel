@@ -15,8 +15,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       @if( Auth::user() )
       <ul class="nav navbar-nav">
-        <li><a href="#">Inicio</a></li>
+        <li><a href="{{ route('front.index') }}">Inicio</a></li>
+        <!--Si el usuario es admin-->
+        @if(Auth::user()->admin())
         <li><a href="{{ route('users.index') }}">Usuarios</a></li>
+        @endif
         <li><a href="{{ route('categories.index') }}">Categorias</a></li>
         <li><a href="{{ route('articles.index') }}">Articulos</a></li>
         <li><a href="{{ route('admin.images.index') }}">Imagenes</a></li>

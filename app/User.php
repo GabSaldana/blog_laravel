@@ -31,4 +31,9 @@ class User extends Authenticatable
 
         return $this->hasMany('App\Article');
     }
+
+    public function admin()
+    {
+      return $this->type === 'doctor';//valida si el tipo de usuario es doctor
+    }
 }
